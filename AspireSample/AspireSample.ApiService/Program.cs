@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
@@ -17,6 +19,11 @@ app.UseExceptionHandler();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+    });
 }
 
 string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
@@ -34,6 +41,39 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
+
+// app.MapGet("/postalcode", (HttpContext context) =>
+// {
+//     using var reader = new StreamReader("nl_subset.geojson");
+//     var json = reader.ReadToEnd();
+//     var geoJson = JsonDocument.Parse(json);
+
+//     var city = context.Request.Query["city"].ToString();
+//     var street = context.Request.Query["street"].ToString();
+//     var houseNumber = context.Request.Query["housenumber"].ToString();
+//     var features = geoJson.RootElement.GetProperty("features").EnumerateArray();
+
+//     var result = features
+//         .Where(feature => 
+//             feature.GetProperty("properties").GetProperty("woonplaatsnaam").GetString() == city &&
+//             feature.GetProperty("properties").GetProperty("openbareruimtenaam").GetString() == street &&
+//             feature.GetProperty("properties").GetProperty("huisnummer").GetString() == houseNumber)
+//         .Select(feature => new
+//         {
+//             Coordinates = feature.GetProperty("geometry").GetProperty("coordinates").EnumerateArray().Select(c => c.GetDouble()).ToArray(),
+//             Properties = feature.GetProperty("properties").EnumerateObject().ToDictionary(p => p.Name, p => p.Value.ToString())
+//         })
+//         .ToList();
+
+//     if (result.Any())
+//     {
+//         context.Response.WriteAsJsonAsync(result);
+//     }
+//     else
+//     {
+//         context.Response.StatusCode = StatusCodes.Status404NotFound;
+//     }
+// }).WithName("GetPostalCode");
 
 app.MapDefaultEndpoints();
 

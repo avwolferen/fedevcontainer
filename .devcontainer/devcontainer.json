@@ -36,7 +36,11 @@
 		"unzip $CODESPACE_VSCODE_FOLDER/Data/nl_postcodes.zip -d $CODESPACE_VSCODE_FOLDER/Data",
 		"mv $CODESPACE_VSCODE_FOLDER/Data/Users/jeffunderwood/Downloads/netherlands_addresses.geojson $CODESPACE_VSCODE_FOLDER/Data/nl_postcodes.geojson",
 		"rm $CODESPACE_VSCODE_FOLDER/Data/Users -r",
-		"rm $CODESPACE_VSCODE_FOLDER/Data/nl_postcodes.zip"
+		"rm $CODESPACE_VSCODE_FOLDER/Data/nl_postcodes.zip",
+		"echo '{ \"type\":\"FeatureCollection\",\"features\":[\" > $CODESPACE_VSCODE_FOLDER/Data/nl_subset.geojson",
+		"grep -i \"apeldoorn\" Data/nl_postcodes.geojson >> Data/nl_subset.geojson",
+		"echo {\"type\": \"Feature\", \"properties\": {\"huisnummer\": 13, \"postcode\": \"1313DD\", \"openbareruimtenaam\": \"Zwaanlaan\", \"woonplaatsnaam\": \"Duckstad\", \"adrestype\": \"Hoofdadres\", \"typeadresseerbaarobject\": \"Verblijfsobject\" }}",
+		"echo ']}' >> $CODESPACE_VSCODE_FOLDER/Data/nl_subset.geojson"
 	],
 	"customizations": {
 		"vscode": {
