@@ -1,3 +1,14 @@
+# Run in dev container
+
+1. Open bash
+2. Run command
+   ```sh
+   dotnet run --project $CODESPACE_VSCODE_FOLDER/AspireSample/AspireSample.AppHost
+   ```
+3. 
+
+
+
 # Getting started with .NET Aspire and Dev Containers
 
 This is a repository template to streamline the process of getting started with .NET Aspire using Dev Containers in both Visual Studio Code and GitHub Codespaces. Please refer to our product documentation on how to use these repository templates to get started.
