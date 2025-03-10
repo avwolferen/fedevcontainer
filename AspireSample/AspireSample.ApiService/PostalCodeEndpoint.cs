@@ -23,7 +23,6 @@ namespace AspireSample.ApiService
 
       app.MapGet("/postalcode/{postalcode}/{housenumber}", async (string postalcode, string housenumber, FedDbContext context) =>
       {
-        postalcode = postalcode.Replace(" ", string.Empty).Trim();
         var result = await context.PostalCodes
           .Where(pc =>pc.Code == postalcode && pc.HouseNumber == housenumber)
           .Select(pc => new { pc.Code, pc.City, pc.HouseNumber, pc.StreetName })
