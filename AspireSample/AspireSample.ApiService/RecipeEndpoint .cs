@@ -10,10 +10,20 @@ namespace AspireSample.ApiService
   {
     public static WebApplication MapRecipeEndpoints(this WebApplication app)
     {
-      app.MapGet("/recipe/{id}", async (string id, FedDbContext context) =>
+      app.MapGet("/badrecipe/{id}", async (string id, FedDbContext context) =>
       {
-        var sql = $"SELECT Id, Code, HouseNumber, City, StreetName FROM PostalCodes WHERE Id = '{id}'";
+        var sql = $"SELECT * FROM Recipes WHERE IsSecret = 0 and Id = '{id}'";
         var result = context.Recipes.FromSqlRaw(sql).AsQueryable() is { } code
+            ? Results.Ok(code)
+            : Results.NotFound();
+
+        return result;
+      })
+      .WithName("GetRecipeBadExample");
+
+      app.MapGet("/recipe/{id}", async (int id, FedDbContext context) =>
+      {
+        var result = await context.Recipes.FirstOrDefaultAsync(r => r.Id == id && r.IsSecret == false) is { } code
             ? Results.Ok(code)
             : Results.NotFound();
 

@@ -1,4 +1,5 @@
 using AspireSample.ApiService;
+using AspireSample.ApiService.Data;
 using AspireSample.ApiService.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
@@ -41,34 +42,8 @@ if (app.Environment.IsDevelopment())
     context.Database.EnsureCreated();
     //    context.Database.Migrate();
 
-    if (context.PostalCodes.Count() == 0)
-    {
-      JsonDocument jsonDoc = JsonDocument.Parse(System.IO.File.ReadAllText("Data/sqlserver/apeldoorn.json"));
-      int id = 1;
-      var nextId = 1;
-      jsonDoc.RootElement.GetProperty("features").EnumerateArray().ToList().ForEach(je =>
-      {
-        if (id > 1000)
-        {
-          return;
-        }
-
-        var properties = je.GetProperty("properties");
-        nextId = id;
-        var postalCode = new PostalCode
-        {
-          Id = nextId,
-          Code = properties.GetProperty("postcode").GetString(),
-          City = properties.GetProperty("woonplaatsnaam").GetString(),
-          HouseNumber = properties.GetProperty("huisnummer").GetInt16().ToString(),
-          StreetName = properties.GetProperty("openbareruimtenaam").GetString()
-        };
-        context.PostalCodes.Add(postalCode);
-
-        context.SaveChanges();
-        id++;
-      });
-    }
+    context.InitializePostalCodes();
+    context.InitializeRecipes();
   }
 }
 

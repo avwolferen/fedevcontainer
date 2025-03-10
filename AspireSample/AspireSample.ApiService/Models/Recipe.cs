@@ -10,5 +10,9 @@ namespace AspireSample.ApiService.Models
     public string Name { get; set; }
 
     public string Preparations { get; set; }
+
+    public string Ingredients { get; set; }
+
+    public bool IsSecret { get; set; } = false;
   }
 }
