@@ -5,7 +5,15 @@
    ```sh
    dotnet run --project $CODESPACE_VSCODE_FOLDER/AspireSample/AspireSample.AppHost
    ```
-3. 
+3. Open the dashboard
+4. Open the apiservice
+5. Navigate to the swagger ui, /swagger
+6. Call the postcode action
+7. valid postalcode: 8266AJ housenumber 19
+8. Call the badpostalcode action
+9. enter any postalcode, enter any housenumber but make sure to add a form of SQL injection to it. e.g.   1' or 1=1--
+10. ![image](https://github.com/user-attachments/assets/9c6e31c5-0fed-464f-9812-5b2f5c57393a)
+
 
 
 
