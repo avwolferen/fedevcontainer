@@ -6,6 +6,16 @@
    dotnet run --project $CODESPACE_VSCODE_FOLDER/AspireSample/AspireSample.AppHost
    ```
 3. Open the dashboard
+
+The api service ran into an error. Use GitHub Copilot to get this fixed in the DataSetInitializer.
+
+```prompt
+Add a couple extra recipes that are secret. Oh, and please make sure you add the preparations to the current recipes because it results in a null reference exception.
+```
+
+Commit changes.
+
+
 4. Open the apiservice
 5. Navigate to the swagger ui, /swagger
 6. Call the postcode action
