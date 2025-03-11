@@ -1,0 +1,58 @@
+@page "/postalcode"
+@inject PostalCodeApiClient PostalCodeApi
+
+<PageTitle>Postal Code</PageTitle>
+
+<h1>Postal Code Lookup</h1>
+
+<EditForm Model="@postalCodeRequest" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="postalCode" class="form-label">Postal Code</label>
+        <InputText id="postalCode" class="form-control" @bind-Value="postalCodeRequest.PostalCode" />
+    </div>
+
+    <div class="mb-3">
+        <label for="houseNumber" class="form-label">House Number</label>
+        <InputText id="houseNumber" class="form-control" @bind-Value="postalCodeRequest.HouseNumber" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+@if (postalCodeResponse != null)
+{
+    <div class="mt-4">
+        <h2>Postal Code Information</h2>
+        <p><strong>Postal Code:</strong> @postalCodeResponse.Code</p>
+        <p><strong>City:</strong> @postalCodeResponse.City</p>
+        <p><strong>House Number:</strong> @postalCodeResponse.HouseNumber</p>
+        <p><strong>Street Name:</strong> @postalCodeResponse.StreetName</p>
+    </div>
+}
+
+@code {
+    private PostalCodeRequest postalCodeRequest = new PostalCodeRequest();
+    private PostalCodeResponse? postalCodeResponse;
+
+    private async Task HandleValidSubmit()
+    {
+        postalCodeResponse = await PostalCodeApi.GetPostalCodeAsync(postalCodeRequest.PostalCode, postalCodeRequest.HouseNumber);
+    }
+
+    public class PostalCodeRequest
+    {
+        public string PostalCode { get; set; } = string.Empty;
+        public string HouseNumber { get; set; } = string.Empty;
+    }
+
+    public class PostalCodeResponse
+    {
+        public string Code { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string HouseNumber { get; set; } = string.Empty;
+        public string StreetName { get; set; } = string.Empty;
+    }
+}
