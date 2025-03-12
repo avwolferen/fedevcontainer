@@ -12,8 +12,8 @@ namespace AspireSample.ApiService
     {
       app.MapGet("/badrecipe/{id}", async (string id, FedDbContext context) =>
       {
-        var sql = $"SELECT * FROM Recipes WHERE IsSecret = 0 and Id = '{id}'";
-        var result = context.Recipes.FromSqlRaw(sql).AsQueryable() is { } code
+        var sql = "SELECT * FROM Recipes WHERE IsSecret = 0 and Id = @id";
+        var result = context.Recipes.FromSqlRaw(sql, new SqlParameter("@id", id)).AsQueryable() is { } code
             ? Results.Ok(code)
             : Results.NotFound();
 
