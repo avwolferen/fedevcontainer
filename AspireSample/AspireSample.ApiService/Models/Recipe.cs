@@ -9,7 +9,7 @@ namespace AspireSample.ApiService.Models
 
     public string Name { get; set; }
 
-    public string Preparations { get; set; }
+    public string Preparations { get; set; } = string.Empty;
 
     public string Ingredients { get; set; }
 
