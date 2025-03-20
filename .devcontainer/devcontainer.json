@@ -32,7 +32,8 @@
 			"extensions": [
 				"ms-dotnettools.csdevkit",
 				"GitHub.copilot-chat",
-				"GitHub.copilot"
+				"GitHub.copilot",
+				"github.copilot-labs"
 			]
 		}
 	}
