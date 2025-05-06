@@ -20,7 +20,6 @@
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.1.0" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="9.1.0" />
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.1.0" />
-    <PackageReference Include="System.Text.Json" version="8.0.4" />
   </ItemGroup>
 
 </Project>
