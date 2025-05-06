@@ -11,6 +11,21 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "nuget"
-    directory: "/"
+    directory: "/AspireSample/AspireSample.ApiService"
     schedule:
       interval: "daily"
+
+  - package-ecosystem: "nuget"
+    directory: "/AspireSample/AspireSample.AppHost"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    directory: "/AspireSample/AspireSample.ServiceDefaults"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    directory: "/AspireSample/AspireSample.Web"
+    schedule:
+      interval: "daily"      
