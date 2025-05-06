@@ -1,1 +1,1 @@
-Answer every with question, and add the text "as you wish!"
+Answer every with question, and start with the text "As you wish! :-)" or "Alright!"
