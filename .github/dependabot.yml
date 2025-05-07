@@ -9,6 +9,10 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      all-updates:
+        patterns:
+          - "*"
 
   - package-ecosystem: "nuget"
     directories:
@@ -18,3 +22,7 @@ updates:
       - "/AspireSample/AspireSample.Web"
     schedule:
       interval: "daily"
+    groups:
+      all-updates:
+        patterns:
+          - "*"
