@@ -12,8 +12,8 @@ namespace AspireSample.ApiService
     {
       app.MapGet("/badpostalcode/{postalcode}/{housenumber}", async (string postalcode, string housenumber, FedDbContext context) =>
       {
-        var sql = $"SELECT Id, Code, HouseNumber, City, StreetName FROM PostalCodes WHERE Code = '{postalcode}' AND HouseNumber = '{housenumber}'";
-        var result = context.PostalCodes.FromSqlRaw(sql).AsQueryable() is { } code
+        var sql = "SELECT Id, Code, HouseNumber, City, StreetName FROM PostalCodes WHERE Code = @postalcode AND HouseNumber = @housenumber";
+        var result = context.PostalCodes.FromSqlRaw(sql, new SqlParameter("@postalcode", postalcode), new SqlParameter("@housenumber", housenumber)).AsQueryable() is { } code
             ? Results.Ok(code)
             : Results.NotFound();
 
