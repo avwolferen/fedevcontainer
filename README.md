@@ -15,8 +15,6 @@
 10. ![image](https://github.com/user-attachments/assets/9c6e31c5-0fed-464f-9812-5b2f5c57393a)
 
 
-
-
 # Getting started with .NET Aspire and Dev Containers
 
 This is a repository template to streamline the process of getting started with .NET Aspire using Dev Containers in both Visual Studio Code and GitHub Codespaces. Please refer to our product documentation on how to use these repository templates to get started.
