@@ -33,7 +33,7 @@ namespace AspireSample.ApiService
 
       app.MapGet("/recipes", async (string id, FedDbContext context) =>
       {
-        var result = context.Recipes.Where(r => r.IsSecret == false).AsQueryable() is { } code
+        var result = context.Recipes.Where(r => !r.IsSecret).AsQueryable() is { } code
             ? Results.Ok(code)
             : Results.NotFound();
 
