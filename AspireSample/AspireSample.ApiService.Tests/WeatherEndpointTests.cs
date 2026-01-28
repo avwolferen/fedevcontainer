@@ -48,7 +48,7 @@ namespace AspireSample.ApiService.Tests
             app.MapWeatherEndpoints();
             await app.StartAsync();
 
-            var client = new HttpClient
+            using var client = new HttpClient
             {
                 BaseAddress = new Uri($"http://localhost:{GetPort(app)}")
             };
