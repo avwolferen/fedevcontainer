@@ -17,10 +17,11 @@ namespace AspireSample.ApiService.Tests
         {
             // Arrange
             var tempC = 20;
-            var expectedTempF = 32 + (int)(tempC / 0.5556);
+            var expectedTempF = 68; // 20°C = 68°F using formula: (20 * 9/5) + 32
 
-            // Act - Using the same formula as in WeatherForecast record
-            var actualTempF = 32 + (int)(tempC / 0.5556);
+            // Act - Test the actual WeatherForecast conversion
+            var forecast = new WeatherApiEndpoints.WeatherForecast(DateOnly.FromDateTime(DateTime.Now), tempC, "Test");
+            var actualTempF = forecast.TemperatureF;
 
             // Assert
             Assert.Equal(expectedTempF, actualTempF);
@@ -30,13 +31,16 @@ namespace AspireSample.ApiService.Tests
         [InlineData(0, 32)]
         [InlineData(100, 212)]
         [InlineData(-40, -40)]
+        [InlineData(20, 68)]
+        [InlineData(-10, 14)]
         public void WeatherForecast_TemperatureConversion_ShouldBeAccurate(int celsius, int expectedFahrenheit)
         {
-            // Act
-            var actualFahrenheit = 32 + (int)(celsius / 0.5556);
+            // Arrange & Act - Test the actual WeatherForecast conversion
+            var forecast = new WeatherApiEndpoints.WeatherForecast(DateOnly.FromDateTime(DateTime.Now), celsius, "Test");
+            var actualFahrenheit = forecast.TemperatureF;
 
-            // Assert - Allow for small rounding differences
-            Assert.InRange(actualFahrenheit, expectedFahrenheit - 1, expectedFahrenheit + 1);
+            // Assert
+            Assert.Equal(expectedFahrenheit, actualFahrenheit);
         }
 
         [Fact]
